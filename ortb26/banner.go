@@ -21,5 +21,6 @@ type Banner struct {
 	APIs         []APIFramework      `json:"api,omitempty"`      // List of supported API frameworks
 	ID           string              `json:"id,omitempty"`       // A unique identifier. Recommended when Banner objects are used with a Video object
 	VCM          int                 `json:"vcm,omitempty"`      // Represents the relationship with video. 0 = concurrent, 1 = end-card
+	ETime        int                 `json:"etime,omitempty"`    // The exposure time in seconds per view that the creative will be displayed before refreshing to the next creative
 	Ext          json.RawMessage     `json:"ext,omitempty"`
 }

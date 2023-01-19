@@ -49,3 +49,19 @@ type Site struct {
 	Search   string `json:"search,omitempty"` // Search string that caused naviation
 	Mobile   int    `json:"mobile,omitempty"` // Mobile ("1": site is mobile optimised)
 }
+
+// Site object should be included if the ad supported content is an out-of-home screen
+// A bid request with a dooh object must not contain a site or app object. At a minimum, it is useful
+// to provide id and/or venuetypeid, but this is not strictly required
+type Dooh struct {
+	ID           string          `json:"id,omitempty"` // ID on the exchange
+	Name         string          `json:"name,omitempty"`
+	VenueType    []string        `json:"venuetype,omitempty"`    // The type of out-of-home venue. The taxonomy to be used is defined by the venuetax field
+	VenueTypeTax int             `json:"venuetypetax,omitempty"` // The venue taxonomy in use
+	Publisher    *Publisher      `json:"publisher,omitempty"`    // Details about the Publisher
+	Domain       string          `json:"domain,omitempty"`       // Domain of the inventory (ads.txt) owner
+	Content      *Content        `json:"content,omitempty"`      // Details about the Content
+	Keywords     string          `json:"keywords,omitempty"`     // Comma separated list of keywords about the site.
+	KeywordArray []string        `json:"kwarray,omitempty"`      // Array of keywords about the site. Only one of ‘keywords’ or ‘kwarray’ may be present.
+	Ext          json.RawMessage `json:"ext,omitempty"`
+}

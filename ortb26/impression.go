@@ -38,7 +38,16 @@ type Impression struct {
 	RWDD                  int             `json:"rwdd,omitempty"`              // Indicates whether the user receives a reward for viewing the ad, where 0 = no, 1 = yes. Typically video ad implementations allow users to read an additional news article for free, receive an extra life in a game, or get a sponsored ad-free music session. The reward is typically distributed after the video ad is completed
 	SSAI                  int             `json:"ssai,omitempty"`              // Indicates if server-side ad insertion (e.g., stitching an ad into an audio or video stream) is in use and the impact of this on asset and tracker retrieval, where 0 = status unknown, 1 = all clientside (i.e., not server-side), 2 = assets stitched server-side but tracking pixels fired client-side, 3 = all server-side
 	Exp                   int             `json:"exp,omitempty"`               // Advisory as to the number of seconds that may elapse between the auction and the actual impression.
+	Qty                   Qty             `json:"qty,omitempty"`
+	Dt                    float64         `json:"dt,omitempty"` // Timestamp when the item is estimated to be fulfilled (e.g. when a DOOH impression will be displayed) in Unix format
 	Ext                   json.RawMessage `json:"ext,omitempty"`
+}
+
+//This object includes the impression multiplier, and describes the source of the multiplier value
+type Qty struct {
+	Multiplier float64 `json:"multiplier,omitempty"` // The quantity of billable events which will be deemed to have occurred if this item is purchased. For example, a DOOH opportunity may be considered to be 14.2 impressions. Equivalent to qtyflt in OpenRTB 3.0
+	Sourcetype int     `json:"sourcetype,omitempty"` // The source type of the quantity measurement, ie. publisher. 0. Unknown 1. Measurement Vendor Provided 2. Publisher Provided 3. Exchange Provided
+	Vendor     string  `json:"vendor,omitempty"`     // required if sourcetype is present and type = 1. The top level business domain name of the measurement vendor providing the quantity measurement
 }
 
 func (imp *Impression) assetCount() int {

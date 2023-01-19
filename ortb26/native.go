@@ -16,5 +16,6 @@ type Native struct {
 	Version      string              `json:"ver,omitempty"`   // Version of the Native Ad Specification to which request complies; highly recommended for efficient parsing.
 	APIs         []APIFramework      `json:"api,omitempty"`   // List of supported API frameworks for this impression.
 	BlockedAttrs []CreativeAttribute `json:"battr,omitempty"` // Blocked creative attributes
+	ETime        int                 `json:"etime,omitempty"` // The exposure time in seconds per view that the creative will be displayed before refreshing to the next creative
 	Ext          json.RawMessage     `json:"ext,omitempty"`
 }
